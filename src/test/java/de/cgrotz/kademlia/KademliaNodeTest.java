@@ -5,7 +5,6 @@ import de.cgrotz.kademlia.node.Key;
 import de.cgrotz.kademlia.node.Node;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Disabled;
 import org.slf4j.simple.SimpleLogger;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -81,62 +80,6 @@ public class KademliaNodeTest {
         finally {
             kad1.close();
             kad2.close();
-        }
-    }
-
-    @Disabled("Disabled until CustomerService is up!")
-    @Test
-    public void simpleTest() {
-        Kademlia kad1 = new Kademlia(
-                Key.build(KEYS[0]),
-                "udp://127.0.0.1:9001"
-        );
-
-        Kademlia kad2 = new Kademlia(
-                Key.build(KEYS[1]),
-                "udp://127.0.0.1:9002"
-        );
-
-        Kademlia kad3 = new Kademlia(
-                Key.build(KEYS[2]),
-                "udp://127.0.0.1:9003"
-        );
-        try {
-
-            kad2.bootstrap(Node.builder().advertisedListener(
-                    new UdpListener("udp://127.0.0.1:9001")
-            ).build());
-
-            kad3.bootstrap(Node.builder().advertisedListener(
-                    new UdpListener("udp://127.0.0.1:9001")
-            ).build());
-
-            assertThat(kad1.routingTable.getBuckets()[158].getNodes(), contains(kad2.localNode));
-            assertThat(kad1.routingTable.getBuckets()[157].getNodes(), contains(kad3.localNode));
-
-            assertThat(kad2.routingTable.getBuckets()[158].getNodes(), containsInAnyOrder(kad1.localNode, kad3.localNode));
-
-            assertThat(kad3.routingTable.getBuckets()[157].getNodes(), containsInAnyOrder(kad1.localNode));
-            assertThat(kad3.routingTable.getBuckets()[158].getNodes(), containsInAnyOrder(kad2.localNode));
-
-            Key key1 = Key.build(KEYS[3]);
-            Key key2 = Key.build(KEYS[4]);
-
-            kad1.put(key1, "Value");
-            kad3.put(key2, "Value2");
-
-            assertThat(kad1.get(key1), equalTo("Value"));
-            assertThat(kad2.get(key1), equalTo("Value"));
-            assertThat(kad3.get(key1), equalTo("Value"));
-
-            assertThat(kad1.get(key2), equalTo("Value2"));
-            assertThat(kad2.get(key2), equalTo("Value2"));
-            assertThat(kad3.get(key2), equalTo("Value2"));
-        }
-        finally {
-            kad1.close();
-            kad2.close();
-            kad3.close();
         }
     }
 
