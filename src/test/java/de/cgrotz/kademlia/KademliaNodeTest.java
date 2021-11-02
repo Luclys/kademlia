@@ -83,6 +83,7 @@ public class KademliaNodeTest {
         }
     }
 
+    @Disabled
     @Test
     public void simpleTest() {
         Kademlia kad1 = new Kademlia(
