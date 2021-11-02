@@ -5,6 +5,7 @@ import de.cgrotz.kademlia.node.Key;
 import de.cgrotz.kademlia.node.Node;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Disabled;
 import org.slf4j.simple.SimpleLogger;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -83,7 +84,7 @@ public class KademliaNodeTest {
         }
     }
 
-    @Disabled
+    @Disabled("Disabled until CustomerService is up!")
     @Test
     public void simpleTest() {
         Kademlia kad1 = new Kademlia(
