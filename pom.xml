@@ -9,6 +9,11 @@
         <version>9</version>
     </parent>
 
+    <properties>
+        <sonar.organization>luclys</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    </properties>
+         
     <groupId>de.cgrotz</groupId>
     <artifactId>kademlia</artifactId>
     <version>1.0.2-SNAPSHOT</version>
